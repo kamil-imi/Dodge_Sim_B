@@ -2,7 +2,7 @@ import pygame
 from scripts.images import get_image_by_relative_path
 from scripts.text import Text
 from scripts.player import Player
-from scripts.animation import AnimationSysForMenu, AnimationSysForMainGame, MBackground, Background
+from scripts.animation import MAnimationSys, FAnimationsSys
 
 
 class Game:
@@ -55,8 +55,8 @@ class Main(Base):
         super().__init__(game)
         self.type = ""
         self.attacks = {}
-        self.sprites = {"player": Player(self, a_type=self.type), "background": Background()}
-        self.animation_sys = AnimationSysForMainGame(self)
+        self.sprites = {"player": Player(self, a_type=self.type)}
+        self.animation_sys = FAnimationsSys(self)
 
     def update(self):
         if self.unlock:
@@ -77,8 +77,7 @@ class Main(Base):
 class Menu(Base):
     def __init__(self, game):
         super().__init__(game)
-        self.sprites["background"] = MBackground(self)
-        self.animation_sys = AnimationSysForMenu(self)
+        self.animation_sys = MAnimationSys(self)
         self.unlock = True
         self.inputs = {
             "up": False,
@@ -115,8 +114,10 @@ class Menu(Base):
                         self.inputs["c"] = True
 
             self.animation_sys.update()
+
             for key in self.sprites.keys():
                 self.sprites[key].update()
+
             for key in self.inputs:
                 self.inputs[key] = False
 

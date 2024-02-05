@@ -2,7 +2,8 @@ import pygame
 
 
 class Text:
-    def __init__(self, text, font_size, color, pos):
+    def __init__(self, text, font_size=24, color=(255, 255, 255), pos=(0, 0)):
+        self.z = 100
         self.text = text
         self.font_size = font_size
         self.color = color
@@ -16,7 +17,7 @@ class Text:
 
         self.rect.topleft = pos
 
-    def update(self, new_text):
+    def update(self, new_text=None):
 
         if new_text:
             self.text = new_text

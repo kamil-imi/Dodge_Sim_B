@@ -1,5 +1,5 @@
 class Timer:
-    def __init__(self, end_tick: int = float("inf"), start_on=False, func=None) -> None:
+    def __init__(self, end_tick: int = float("inf"), start_on=True, func=None) -> None:
         self.func = func
 
         self.end_tick = end_tick
